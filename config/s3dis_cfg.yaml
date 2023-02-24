@@ -28,9 +28,9 @@ TRAIN:
   manual_seed: 7777
   print_freq: 1
   save_freq: 1
-  save_path:  /home/pknu/code/trans/expTest_2022/s3dis
+  save_path: exp/s3dis
   weight: 
-  resume: /home/pknu/code/trans/expTest_2022/s3dis/model/model_last.pth 
+  resume: exp/s3dis/model/model_last.pth 
   evaluate: True 
   eval_freq: 1
 Distributed:
@@ -41,12 +41,12 @@ Distributed:
   rank: 0
 
 TEST:
-  test_list: /home/dataset/s3dis/val5.txt
-  test_list_full: /home/pknu/code/s3dis/list/val5_full.txt
+  test_list: dataset/s3dis/val5.txt
+  test_list_full: dataset/s3dis/list/val5_full.txt
   split: val
   test_gpu: [0]
   test_workers: 4
   batch_size_test: 4
-  model_path: /home/pknu/code/trans/expTest_2022/s3dis/model/model_best.pth 
-  save_folder: /home/pknu/code/trans/expTest_2022/s3dis/test
-  names_path: /home/pknu/code/s3dis/s3dis_names.txt
+  model_path: exp/s3dis/model/model_best.pth 
+  save_folder: exp/s3dis/test
+  names_path: dataset/s3dis/s3dis_names.txt
