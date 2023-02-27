@@ -181,26 +181,6 @@ class LGPABlock(nn.Module):
         x = self.act(x)
         return [p, x, o]
 
-class LGPABlock(nn.Module):
-    expansion = 1
-
-    def __init__(self, in_planes, planes, share_planes=8, nsample=16):
-        super(LGPABlock, self).__init__()
-        self.linear1 = nn.Linear(in_planes, planes, bias=False)
-        self.bn1 = nn.BatchNorm1d(planes)
-
-        self.lgpa = LGPALayer(planes, planes, share_planes, nsample)
-        self.bn2 = nn.BatchNorm1d(planes)
-        self.linear3 = nn.Linear(planes, planes * self.expansion, bias=False)
-        self.bn3 = nn.BatchNorm1d(planes * self.expansion)
-        self.act = nn.ReLU(inplace=True)
-
-    def forward(self, pxo):
-        p, x, o = pxo
-        identity = x
-        x = self.act((self.bn1(self.linear1(x))))
-        return [p, x, o]
-
 class LGPANetwork(nn.Module):
     def __init__(self, block, blocks, c=6, k=13,unitArch=[32, 64, 128, 256, 512]):
         super().__init__()
