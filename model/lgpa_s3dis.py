@@ -74,7 +74,6 @@ class LGPALayer(nn.Module):
         # ================================================== Weight ==================================================
         
         w_spatial_d = torch.matmul((x_k - x_q.unsqueeze(1)).transpose(0,2).contiguous(),x_uni_spatial)
-        w_spatial_d = torch.matmul(x_k.transpose(0,2).contiguous(),x_uni_spatial)
         w_spatial_d = self.softmax2(w_spatial_d)  # (n, nsample, c)
         w_spatial_e = torch.matmul(x_r,w_spatial_d.transpose(0,1).contiguous()).transpose(0,1).contiguous()
         
@@ -242,7 +241,6 @@ class LGPANetwork(nn.Module):
         x1 = self.dec1[1:]([p1, self.dec1[0]([p1, x1, o1], [p2, x2, o2]), o1])[1]
         x = self.cls(x1)
         return x
-
 
 def lgpa_repro(custom=None, **kwargs):
     
